@@ -14,14 +14,14 @@ try:
         os.path.abspath(
             os.path.join(
                 os.path.dirname(__file__),
-                    '..\src'))  #type: ignore
+                    '../src'))  #type: ignore
     )
 except ImportError:
     print("Erro ao importar módulos necessários para os testes.")
     sys.exit(1)
 
 import unittest
-from src.baconcomovos import bacon_com_ovos
+from baconcomovos import bacon_com_ovos
 
 class TestBaconComOvos(unittest.TestCase):
     def test_bacon_com_ovos_deve_levantar_assertion_error_se_valor_nao_for_inteiro(self):

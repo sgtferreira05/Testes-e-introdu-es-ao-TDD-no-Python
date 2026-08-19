@@ -28,7 +28,8 @@ except ImportError:
 
 import unittest
 from unittest.mock import patch
-from src.pessoa import Pessoa
+from pessoa import Pessoa
+
 
 class TestPessoa(unittest.TestCase):
     def setUp(self):
@@ -64,7 +65,7 @@ class TestPessoa(unittest.TestCase):
 
             self.assertEqual(self.pessoa2.obter_todos_os_dados(), 'CONECTADO')
             self.assertTrue(self.pessoa2.dados_obtidos)
-    
+            
     def test_obter_todos_os_dados_falha_404(self):
         with patch('requests.get') as fake_request:
             fake_request.return_value.ok = False
@@ -76,7 +77,7 @@ class TestPessoa(unittest.TestCase):
             self.assertEqual(self.pessoa2.obter_todos_os_dados(), 'ERRO 404')
             self.assertFalse(self.pessoa2.dados_obtidos)
 
-    def test_obter_todos_os_dados_secesso_e_falha(self):
+    def test_obter_todos_os_dados_sucesso_e_falha(self):
         with patch('requests.get') as fake_request:
             # Simula sucesso
             fake_request.return_value.ok = True
@@ -88,15 +89,13 @@ class TestPessoa(unittest.TestCase):
 
             # Simula falha
             fake_request.return_value.ok = False
-            fake_request.return_value.status_code = 404
-            
+            fake_request.return_value.status_code = 404           
             self.assertEqual(self.pessoa.obter_todos_os_dados(), 'ERRO 404')
             self.assertFalse(self.pessoa.dados_obtidos)
 
             self.assertEqual(self.pessoa2.obter_todos_os_dados(), 'ERRO 404')
             self.assertFalse(self.pessoa2.dados_obtidos)
 
-
-
+           
 if __name__ == '__main__':
     unittest.main(verbosity=2)

@@ -14,7 +14,7 @@ except ImportError:
 
 
 import unittest
-from src.calculadora import soma, subtracao
+from calculadora import soma, subtracao
 
 class TestCalculadora(unittest.TestCase):
     def test_soma(self):
